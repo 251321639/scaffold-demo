@@ -13,6 +13,8 @@ const (
 
 var (
 	Port string
+	JwtSignKey string
+	JWT_EXPIRE_TIME int64
 )
 
 func initLogConfig(logLevel string) {
@@ -29,9 +31,14 @@ func initLogConfig(logLevel string) {
 func init() {
 	viper.SetDefault("LOG_LEVEL", "debug")
 	viper.SetDefault("PORT", ":8080")
+	viper.SetDefault("JWT_EXPIRE_TIME", 120)
 	viper.AutomaticEnv()
+	viper.SetDefault("JWT_SIGN_KEY", "abc")
 	logLevel := viper.GetString("LOG_LEVEL")
 	Port = viper.GetString("PORT")
+	JWT_EXPIRE_TIME = viper.GetInt64("JWT_EXPIRE_TIME")
 	initLogConfig(logLevel)
 	logs.Info(nil, "初始化")
+	JwtSignKey = viper.GetString("JWT_SIGN_KEY")
+
 }
