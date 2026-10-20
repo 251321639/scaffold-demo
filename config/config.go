@@ -1,6 +1,8 @@
 package config
 
 import (
+	"path"
+	"runtime"
 	"scaffold-demo/utils/logs"
 
 	"github.com/sirupsen/logrus"
@@ -41,7 +43,12 @@ func initLogConfig(logLevel string) {
 	}
 
 	logrus.SetReportCaller(true)
-	logrus.SetFormatter(&logrus.JSONFormatter{TimestampFormat: TimeFormat})
+	logrus.SetFormatter(&logrus.JSONFormatter{
+		TimestampFormat: TimeFormat,
+		CallerPrettyfier: func(frame *runtime.Frame) (function string, file string) {
+			return frame.Function, path.Base(frame.File)
+		},
+	})
 }
 
 func init() {
