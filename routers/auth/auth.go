@@ -13,7 +13,7 @@ func login(authGroup *gin.RouterGroup) {
 
 func logout(authGroup *gin.RouterGroup) {
 	// 处理登出逻辑
-	authGroup.POST("/logout", auth.Logout)
+	authGroup.GET("/logout", auth.Logout)
 }
 
 func RegisterSubRoutes(g *gin.RouterGroup) {

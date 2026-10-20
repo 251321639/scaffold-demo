@@ -4,9 +4,7 @@ import (
 	// "fmt"
 	"scaffold-demo/config"
 	"scaffold-demo/routers"
-
-	// _ "scaffold-demo/config"
-	// "scaffold-demo/utils/jwtutil"
+	"scaffold-demo/middlerwares"
 	"scaffold-demo/utils/logs"
 
 	"github.com/gin-gonic/gin"
@@ -14,6 +12,7 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.Use(middlerwares.JWTAuth)
 	logs.Info(nil, "服务启动成功")
 	// ss, _ := jwtutil.GenToken("ddd")
 	// _, err := jwtutil.ParseToken(ss)
