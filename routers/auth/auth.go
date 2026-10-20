@@ -1,0 +1,23 @@
+package auth
+
+import (
+	"scaffold-demo/controllers/auth"
+
+	"github.com/gin-gonic/gin"
+)
+
+func login(authGroup *gin.RouterGroup) {
+	// 处理登录逻辑
+	authGroup.POST("/login", auth.Login)
+}
+
+func logout(authGroup *gin.RouterGroup) {
+	// 处理登出逻辑
+	authGroup.POST("/logout", auth.Logout)
+}
+
+func RegisterSubRoutes(g *gin.RouterGroup) {
+	authGroup := g.Group("/auth")
+	login(authGroup)
+	logout(authGroup)
+}
