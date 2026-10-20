@@ -19,6 +19,20 @@ var (
 	Password		string
 )
 
+type Response struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    map[string]any `json:"data,omitempty"`
+}
+
+func NewResponse(code int, message string, data map[string]any) *Response {
+	return &Response{
+		Code:    code,
+		Message: message,
+		Data:    data,
+	}
+}
+
 func initLogConfig(logLevel string) {
 	if logLevel == "debug" {
 		logrus.SetLevel(logrus.DebugLevel)
